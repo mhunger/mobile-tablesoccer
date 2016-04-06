@@ -11,28 +11,28 @@ import UIKit
 class ViewController: UIViewController {
 
     private var game: Game = Game();
+
+    @IBOutlet weak var teamTwoScore: UIButton!
     
-    @IBOutlet weak var teamOneScore: UILabel!
-    
-    @IBOutlet weak var teamTwoScore: UILabel!
+    @IBOutlet weak var teamOneScore: UIButton!
     
     var teamOneScoreDisplayValue: Int{
         get{
-            return NSNumberFormatter().numberFromString(teamOneScore.text!)!.integerValue
+            return NSNumberFormatter().numberFromString(teamOneScore.titleLabel!.text!)!.integerValue
         }
         
         set{
-            teamOneScore.text = "\(newValue)"
+            teamOneScore.setTitle("\(newValue)", forState: UIControlState.Normal)
         }
     }
     
     var teamTwoScoreDisplayValue: Int{
         get{
-            return NSNumberFormatter().numberFromString(teamTwoScore.text!)!.integerValue
+            return NSNumberFormatter().numberFromString(teamTwoScore.titleLabel!.text!)!.integerValue
         }
         
         set{
-            teamTwoScore.text = "\(newValue)"
+            teamTwoScore.setTitle("\(newValue)", forState: .Normal)
         }
     }
     
