@@ -35,4 +35,10 @@ class Game {
     func getTeamScore(team: teamId) -> Int{
         return currentScore[team]!
     }
+    
+    func increaseScore(team: teamId) {
+        var tempScore: Int = currentScore[team]!;
+        tempScore = (tempScore + 1)
+        currentScore[team] = tempScore
+    }
 }

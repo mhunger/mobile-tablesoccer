@@ -11,29 +11,49 @@ import UIKit
 class ViewController: UIViewController {
 
     private var game: Game = Game();
-
-    @IBOutlet weak var teamTwoScore: UIButton!
     
-    @IBOutlet weak var teamOneScore: UIButton!
+    @IBOutlet weak var teamOneScore: UILabel!
+    
+    @IBOutlet weak var teamTwoScore: UILabel!
     
     var teamOneScoreDisplayValue: Int{
         get{
-            return NSNumberFormatter().numberFromString(teamOneScore.titleLabel!.text!)!.integerValue
+            return NSNumberFormatter().numberFromString(teamOneScore.text!)!.integerValue
         }
         
         set{
-            teamOneScore.setTitle("\(newValue)", forState: UIControlState.Normal)
+            teamOneScore.text = "\(newValue)"
         }
     }
     
     var teamTwoScoreDisplayValue: Int{
         get{
-            return NSNumberFormatter().numberFromString(teamTwoScore.titleLabel!.text!)!.integerValue
+            return NSNumberFormatter().numberFromString(teamTwoScore.text!)!.integerValue
         }
         
         set{
-            teamTwoScore.setTitle("\(newValue)", forState: .Normal)
+            teamTwoScore.text = "\(newValue)"
         }
+    }
+    
+    @IBAction func increaseScoreTeamOnePlayerOne(sender: UIButton) {
+        game.increaseScore(Game.teamId.team1)
+        setTeamScore()
+    }
+    
+    @IBAction func increaseScoreTeamOnePlayerTwo(sender: UIButton) {
+        game.increaseScore(Game.teamId.team1)
+        setTeamScore()
+    }
+    
+    @IBAction func increaseScoreTeamTwoPlayerOne(sender: UIButton) {
+        game.increaseScore(Game.teamId.team2)
+        setTeamScore()
+    }
+    
+    @IBAction func increaseScoreTeamTwoPlayerTwo(sender: UIButton) {
+        game.increaseScore(Game.teamId.team2)
+        setTeamScore()
     }
     
     override func viewDidLoad() {
@@ -55,6 +75,11 @@ class ViewController: UIViewController {
             game.startGame()
             sender.setTitle("Stop Game", forState: UIControlState.Normal)
         }
+
+        setTeamScore()
+    }
+    
+    func setTeamScore() {
         
         teamOneScoreDisplayValue = game.getTeamScore(Game.teamId.team1)
         teamTwoScoreDisplayValue = game.getTeamScore(Game.teamId.team2)
