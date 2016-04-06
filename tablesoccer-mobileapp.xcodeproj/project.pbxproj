@@ -13,6 +13,7 @@
 		CA12EBC71CB5A8AB00FB75E4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA12EBC61CB5A8AB00FB75E4 /* Images.xcassets */; };
 		CA12EBCA1CB5A8AB00FB75E4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA12EBC81CB5A8AB00FB75E4 /* LaunchScreen.xib */; };
 		CA12EBD61CB5A8AB00FB75E4 /* tablesoccer_mobileappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12EBD51CB5A8AB00FB75E4 /* tablesoccer_mobileappTests.swift */; };
+		CA12EBE11CB5AEA300FB75E4 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12EBE01CB5AEA300FB75E4 /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		CA12EBCF1CB5A8AB00FB75E4 /* tablesoccer-mobileappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "tablesoccer-mobileappTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA12EBD41CB5A8AB00FB75E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA12EBD51CB5A8AB00FB75E4 /* tablesoccer_mobileappTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tablesoccer_mobileappTests.swift; sourceTree = "<group>"; };
+		CA12EBE01CB5AEA300FB75E4 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +79,11 @@
 		CA12EBBC1CB5A8AB00FB75E4 /* tablesoccer-mobileapp */ = {
 			isa = PBXGroup;
 			children = (
-				CA12EBBF1CB5A8AB00FB75E4 /* AppDelegate.swift */,
+				CA12EBDF1CB5ADC600FB75E4 /* Game */,
 				CA12EBC11CB5A8AB00FB75E4 /* ViewController.swift */,
 				CA12EBC31CB5A8AB00FB75E4 /* Main.storyboard */,
-				CA12EBC61CB5A8AB00FB75E4 /* Images.xcassets */,
 				CA12EBC81CB5A8AB00FB75E4 /* LaunchScreen.xib */,
+				CA12EBBF1CB5A8AB00FB75E4 /* AppDelegate.swift */,
 				CA12EBBD1CB5A8AB00FB75E4 /* Supporting Files */,
 			);
 			path = "tablesoccer-mobileapp";
@@ -90,6 +92,7 @@
 		CA12EBBD1CB5A8AB00FB75E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CA12EBC61CB5A8AB00FB75E4 /* Images.xcassets */,
 				CA12EBBE1CB5A8AB00FB75E4 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -110,6 +113,14 @@
 				CA12EBD41CB5A8AB00FB75E4 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CA12EBDF1CB5ADC600FB75E4 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				CA12EBE01CB5AEA300FB75E4 /* Game.swift */,
+			);
+			name = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -213,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA12EBC21CB5A8AB00FB75E4 /* ViewController.swift in Sources */,
+				CA12EBE11CB5AEA300FB75E4 /* Game.swift in Sources */,
 				CA12EBC01CB5A8AB00FB75E4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
