@@ -16,6 +16,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var teamTwoScore: UILabel!
     
+    @IBOutlet weak var teamOneMatchOne: UILabel!
+    
+    @IBOutlet weak var teamOneMatchTwo: UILabel!
+    
+    @IBOutlet weak var teamTwoMatchOne: UILabel!
+    
+    @IBOutlet weak var teamTwoMatchTwo: UILabel!
+    
     var teamOneScoreDisplayValue: Int{
         get{
             return NSNumberFormatter().numberFromString(teamOneScore.text!)!.integerValue
@@ -37,22 +45,38 @@ class ViewController: UIViewController {
     }
     
     @IBAction func increaseScoreTeamOnePlayerOne(sender: UIButton) {
-        game.increaseScore(Game.teamId.team1)
+        game.increaseScore(
+            Game.teamId.team1,
+            opponent: Game.teamId.team2
+        )
+        
         setTeamScore()
     }
     
     @IBAction func increaseScoreTeamOnePlayerTwo(sender: UIButton) {
-        game.increaseScore(Game.teamId.team1)
+        game.increaseScore(
+            Game.teamId.team1,
+            opponent: Game.teamId.team2
+        )
+        
         setTeamScore()
     }
     
     @IBAction func increaseScoreTeamTwoPlayerOne(sender: UIButton) {
-        game.increaseScore(Game.teamId.team2)
+        game.increaseScore(
+            Game.teamId.team2,
+            opponent: Game.teamId.team1
+        )
+        
         setTeamScore()
     }
     
     @IBAction func increaseScoreTeamTwoPlayerTwo(sender: UIButton) {
-        game.increaseScore(Game.teamId.team2)
+        game.increaseScore(
+            Game.teamId.team2,
+            opponent: Game.teamId.team1
+        )
+        
         setTeamScore()
     }
     
@@ -83,6 +107,32 @@ class ViewController: UIViewController {
         
         teamOneScoreDisplayValue = game.getTeamScore(Game.teamId.team1)
         teamTwoScoreDisplayValue = game.getTeamScore(Game.teamId.team2)
+        
+        setMatches()
+        
+    }
+    
+    func setMatches(){
+        var matches = game.getTeamMatches()
+        print(matches)
+        println()
+        
+        if(matches[Game.teamId.team1] > 0) {
+            teamOneMatchOne.backgroundColor = UIColor.blackColor()
+            print("writing color")
+        }
+        
+        if(matches[Game.teamId.team1] > 1) {
+            teamOneMatchTwo.backgroundColor = UIColor.blackColor()
+        }
+        
+        if(matches[Game.teamId.team2] > 0) {
+            teamTwoMatchOne.backgroundColor = UIColor.blackColor()
+        }
+        
+        if(matches[Game.teamId.team2] > 1) {
+            teamTwoMatchTwo.backgroundColor = UIColor.blackColor()
+        }
     }
 }
 
