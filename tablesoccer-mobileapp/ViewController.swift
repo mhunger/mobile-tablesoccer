@@ -12,7 +12,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     private var game: Game = Game();
     
-    var players = [Player]()
+    private var players = [Player]()
+    
+    private var draggedCell: PlayerTableViewCell = PlayerTableViewCell()
+    
+    @IBOutlet weak var teamOnePlayerOneButton: UIButton!
+    
+    private var draggedCellIndexPath: NSIndexPath = NSIndexPath()
     
     @IBOutlet weak var teamOneScore: UILabel!
     
@@ -142,8 +148,42 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         loadSamplePlayers()
         
+        let longpress = UILongPressGestureRecognizer(target: self, action: "longPressGestureRecognized:")
+        playerTable.addGestureRecognizer(longpress)
+        
+        
         playerTable.delegate = self
         playerTable.dataSource = self
+    }
+    
+    func longPressGestureRecognized(gestureRecognizer: UIGestureRecognizer) {
+        let longpress = gestureRecognizer as! UILongPressGestureRecognizer
+        
+        let state = longpress.state
+        
+        var locationInTableView = longpress.locationInView(playerTable)
+        
+        var locationInView = longpress.locationInView(self.view)
+        
+        var indexPath = playerTable.indexPathForRowAtPoint(locationInTableView)
+        
+        switch (state) {
+        case UIGestureRecognizerState.Began:
+            if let test = indexPath {
+                draggedCellIndexPath = indexPath!
+                draggedCell = playerTable.cellForRowAtIndexPath(indexPath!) as! PlayerTableViewCell
+            }
+        case UIGestureRecognizerState.Changed:
+            println("Changed")
+        default:
+            if(CGRectContainsPoint(teamOnePlayerOneButton.frame, locationInView)) {
+                teamOnePlayerOneButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+            }
+            
+            println("Index Path\(indexPath)")
+            println("finished")
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
