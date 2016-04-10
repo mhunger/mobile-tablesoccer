@@ -83,8 +83,8 @@
 		CA12EBBC1CB5A8AB00FB75E4 /* tablesoccer-mobileapp */ = {
 			isa = PBXGroup;
 			children = (
-				CA12EBDF1CB5ADC600FB75E4 /* Game */,
 				CA12EBC11CB5A8AB00FB75E4 /* ViewController.swift */,
+				CA12EBDF1CB5ADC600FB75E4 /* Game */,
 				CA12EBC31CB5A8AB00FB75E4 /* Main.storyboard */,
 				CA12EBC81CB5A8AB00FB75E4 /* LaunchScreen.xib */,
 				CA12EBBF1CB5A8AB00FB75E4 /* AppDelegate.swift */,
