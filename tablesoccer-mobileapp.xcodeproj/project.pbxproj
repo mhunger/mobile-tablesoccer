@@ -14,6 +14,8 @@
 		CA12EBCA1CB5A8AB00FB75E4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA12EBC81CB5A8AB00FB75E4 /* LaunchScreen.xib */; };
 		CA12EBD61CB5A8AB00FB75E4 /* tablesoccer_mobileappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12EBD51CB5A8AB00FB75E4 /* tablesoccer_mobileappTests.swift */; };
 		CA12EBE11CB5AEA300FB75E4 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12EBE01CB5AEA300FB75E4 /* Game.swift */; };
+		CA14E7051CBA69E800602003 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA14E7041CBA69E800602003 /* PlayerTableViewCell.swift */; };
+		CA14E7071CBA6CBF00602003 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA14E7061CBA6CBF00602003 /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 		CA12EBD41CB5A8AB00FB75E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA12EBD51CB5A8AB00FB75E4 /* tablesoccer_mobileappTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tablesoccer_mobileappTests.swift; sourceTree = "<group>"; };
 		CA12EBE01CB5AEA300FB75E4 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		CA14E7041CBA69E800602003 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
+		CA14E7061CBA6CBF00602003 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,7 @@
 				CA12EBC81CB5A8AB00FB75E4 /* LaunchScreen.xib */,
 				CA12EBBF1CB5A8AB00FB75E4 /* AppDelegate.swift */,
 				CA12EBBD1CB5A8AB00FB75E4 /* Supporting Files */,
+				CA14E7041CBA69E800602003 /* PlayerTableViewCell.swift */,
 			);
 			path = "tablesoccer-mobileapp";
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				CA12EBE01CB5AEA300FB75E4 /* Game.swift */,
+				CA14E7061CBA6CBF00602003 /* Player.swift */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -223,8 +229,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA14E7051CBA69E800602003 /* PlayerTableViewCell.swift in Sources */,
 				CA12EBC21CB5A8AB00FB75E4 /* ViewController.swift in Sources */,
 				CA12EBE11CB5AEA300FB75E4 /* Game.swift in Sources */,
+				CA14E7071CBA6CBF00602003 /* Player.swift in Sources */,
 				CA12EBC01CB5A8AB00FB75E4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,6 +431,7 @@
 				CA12EBDB1CB5A8AB00FB75E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CA12EBDC1CB5A8AB00FB75E4 /* Build configuration list for PBXNativeTarget "tablesoccer-mobileappTests" */ = {
 			isa = XCConfigurationList;
@@ -431,6 +440,7 @@
 				CA12EBDE1CB5A8AB00FB75E4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

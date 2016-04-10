@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7534A0A1-0F21-4126-BA54-04A8A062AF6A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>tablesoccer-mobileapp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C9F7BB200BEE3275FB65435E09B0E131565BFE53</key>
+		<string>https://github.com/mhunger/mobile-tablesoccer.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>tablesoccer-mobileapp.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C9F7BB200BEE3275FB65435E09B0E131565BFE53</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/mhunger/mobile-tablesoccer.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C9F7BB200BEE3275FB65435E09B0E131565BFE53</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C9F7BB200BEE3275FB65435E09B0E131565BFE53</string>
+			<key>IDESourceControlWCCName</key>
+			<string>tablesoccer-mobileapp</string>
+		</dict>
+	</array>
+</dict>
+</plist>
