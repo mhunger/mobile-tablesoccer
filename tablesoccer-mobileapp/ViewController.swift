@@ -157,6 +157,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func longPressGestureRecognized(gestureRecognizer: UIGestureRecognizer) {
+        struct My {
+            
+            static var cellSnapshot : UIView? = nil
+            
+        }
+        struct Path {
+            
+            static var initialIndexPath : NSIndexPath? = nil
+            
+        }
+        
         let longpress = gestureRecognizer as! UILongPressGestureRecognizer
         
         let state = longpress.state
@@ -165,25 +176,119 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         var locationInView = longpress.locationInView(self.view)
         
+        println("\(locationInTableView)")
+        println("\(locationInView)")
+        
         var indexPath = playerTable.indexPathForRowAtPoint(locationInTableView)
         
         switch (state) {
         case UIGestureRecognizerState.Began:
             if let test = indexPath {
+                Path.initialIndexPath = indexPath
+                
                 draggedCellIndexPath = indexPath!
                 draggedCell = playerTable.cellForRowAtIndexPath(indexPath!) as! PlayerTableViewCell
+                
+                My.cellSnapshot  = snapshopOfCell(draggedCell)
+                
+                var center = draggedCell.center
+                
+                println("\(center)")
+                My.cellSnapshot!.center = center
+                
+                My.cellSnapshot!.alpha = 0.0
+                
+                self.view.addSubview(My.cellSnapshot!)
+                
+                UIView.animateWithDuration(0.25, animations: { () -> Void in
+                    
+                    center.y = locationInView.y
+                    
+                    My.cellSnapshot!.center = center
+                    
+                    My.cellSnapshot!.transform = CGAffineTransformMakeScale(1.05, 1.05)
+                    
+                    My.cellSnapshot!.alpha = 0.98
+                    
+                    self.draggedCell.alpha = 0.0
+                    
+                    }, completion: { (finished) -> Void in
+                        
+                        if finished {
+                            
+                            self.draggedCell.hidden = true
+                            
+                        }
+                })
             }
         case UIGestureRecognizerState.Changed:
-            println("Changed")
+            var center = My.cellSnapshot!.center
+            
+            center.y = locationInView.y
+            
+            My.cellSnapshot!.center = center
         default:
             if(CGRectContainsPoint(teamOnePlayerOneButton.frame, locationInView)) {
                 teamOnePlayerOneButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
             }
             
+            draggedCell.hidden = false
+            
+            draggedCell.alpha = 0.0
+            
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                
+                My.cellSnapshot!.center = self.draggedCell.center
+                
+                My.cellSnapshot!.transform = CGAffineTransformIdentity
+                
+                My.cellSnapshot!.alpha = 0.0
+                
+                self.draggedCell.alpha = 1.0
+                
+                }, completion: { (finished) -> Void in
+                    
+                    if finished {
+                        
+                        Path.initialIndexPath = nil
+                        
+                        My.cellSnapshot!.removeFromSuperview()
+                        
+                        My.cellSnapshot = nil
+                        
+                    }
+                    
+            })
+            
             println("Index Path\(indexPath)")
             println("finished")
             
         }
+    }
+    
+    func snapshopOfCell(inputView: UIView) -> UIView {
+        UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, false, 0.0)
+        
+        inputView.layer.renderInContext(UIGraphicsGetCurrentContext())
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext() as UIImage
+        
+        UIGraphicsEndImageContext()
+        
+        let cellSnapshot : UIView = UIImageView(image: image)
+        
+        cellSnapshot.layer.masksToBounds = false
+        
+        cellSnapshot.layer.cornerRadius = 0.0
+        
+        cellSnapshot.layer.shadowOffset = CGSizeMake(-5.0, 0.0)
+        
+        cellSnapshot.layer.shadowRadius = 5.0
+        
+        cellSnapshot.layer.shadowOpacity = 0.4
+        
+        return cellSnapshot
+        
     }
 
     override func didReceiveMemoryWarning() {
