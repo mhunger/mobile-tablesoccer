@@ -18,6 +18,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var teamOnePlayerOneButton: UIButton!
     
+    @IBOutlet weak var teamOnePlayerTwoButton: UIButton!
+    
+    @IBOutlet weak var teamTwoPlayerOneButton: UIButton!
+    
+    @IBOutlet weak var teamTwoPlayerTwoButton: UIButton!
+    
     private var draggedCellIndexPath: NSIndexPath = NSIndexPath()
     
     @IBOutlet weak var teamOneScore: UILabel!
@@ -99,6 +105,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let player = players[indexPath.row]
         
+        cell.setPlayer(player)
         cell.firstName.text = player.getFirstname();
         cell.lastName.text = player.getLastname()
         cell.ranking.text = String(player.getRanking())
@@ -187,10 +194,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 My.cellSnapshot  = snapshopOfCell(draggedCell)
                 
-                let globalPoint = draggedCell.superview?.convertPoint(draggedCell.frame.origin, toView: nil)
-                
-                println("global point: \(globalPoint)")
-                
                 My.cellSnapshot!.center.x = locationInView.x
                 
                 My.cellSnapshot!.center.y = locationInView.y
@@ -207,9 +210,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             My.cellSnapshot!.center = center
         default:
-            if(CGRectContainsPoint(teamOnePlayerOneButton.frame, locationInView)) {
-                teamOnePlayerOneButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
-            }
+            setPlayerIfDraggedOnButton(locationInView)
             
             draggedCell.hidden = false
             
@@ -238,11 +239,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     }
                     
             })
-            
-            println("Index Path\(indexPath)")
-            println("finished")
+        }
+    }
+    
+    func setPlayerIfDraggedOnButton(locationInView: CGPoint) {
+        if(CGRectContainsPoint(teamOnePlayerOneButton.frame, locationInView)) {
+            teamOnePlayerOneButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+        }
+        
+        if(CGRectContainsPoint(teamOnePlayerTwoButton.frame, locationInView)) {
+            teamOnePlayerTwoButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
             
         }
+        
+        if(CGRectContainsPoint(teamTwoPlayerOneButton.frame, locationInView)) {
+            teamTwoPlayerOneButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+        }
+        
+        if(CGRectContainsPoint(teamTwoPlayerTwoButton.frame, locationInView)) {
+            teamTwoPlayerTwoButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+        }
+
+        game.addPlayer(Game.teamId.team1, player: draggedCell.getPlayer())
+        println("\(game)")
     }
     
     func snapshopOfCell(inputView: UIView) -> UIView {
@@ -267,7 +286,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cellSnapshot.layer.shadowOpacity = 0.4
         
         return cellSnapshot
-        
     }
 
     override func didReceiveMemoryWarning() {

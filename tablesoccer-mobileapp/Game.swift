@@ -22,9 +22,20 @@ class Game {
     
     private var maxMatches: Int = 2
     
+    private var teams = [teamId:Team]()
+    
     enum teamId {
         case team1
         case team2
+    }
+    
+    init () {
+        teams[teamId.team1] = Team()
+        teams[teamId.team2] = Team()
+    }
+    
+    func addPlayer(team:teamId, player: Player) {
+        teams[team]?.addPlayer(player)
     }
     
     func startGame() {

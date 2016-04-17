@@ -164,9 +164,12 @@
                         <outlet property="teamOneMatchOne" destination="1LQ-cK-5nB" id="JGg-Go-Q9b"/>
                         <outlet property="teamOneMatchTwo" destination="2mc-id-Rw4" id="GM9-BM-XgQ"/>
                         <outlet property="teamOnePlayerOneButton" destination="rq2-nw-Xuo" id="t7N-XN-XgB"/>
+                        <outlet property="teamOnePlayerTwoButton" destination="iT2-sj-jTr" id="8zz-QA-c1A"/>
                         <outlet property="teamOneScore" destination="UJi-dL-je9" id="gO6-Lx-OkT"/>
                         <outlet property="teamTwoMatchOne" destination="Irr-O3-nwx" id="RDl-Yp-FEB"/>
                         <outlet property="teamTwoMatchTwo" destination="t0I-YJ-sW8" id="cBq-5Y-kXn"/>
+                        <outlet property="teamTwoPlayerOneButton" destination="BgY-Ss-zDD" id="KoR-8N-sxO"/>
+                        <outlet property="teamTwoPlayerTwoButton" destination="dzQ-Mo-SeO" id="7QT-hF-jXJ"/>
                         <outlet property="teamTwoScore" destination="t1m-oJ-9TJ" id="Hfx-pR-Ivu"/>
                     </connections>
                 </viewController>
