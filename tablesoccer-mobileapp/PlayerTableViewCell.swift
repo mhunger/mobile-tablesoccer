@@ -16,6 +16,8 @@ class PlayerTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lastName: UILabel!
     
+    private var player: Player?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,5 +28,12 @@ class PlayerTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func setPlayer(player: Player) {
+        self.player = player
+    }
+    
+    func getPlayer() -> Player{
+        return player!
+    }
 }
