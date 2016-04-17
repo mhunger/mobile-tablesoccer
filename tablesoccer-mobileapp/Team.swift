@@ -8,10 +8,14 @@
 
 import Foundation
 
-class Team {
+class Team: NSObject {
     private var player1: Player?
     
     private var player2: Player?
+    
+    override  var description: String {
+        return "\(player1?.getFirstname()) \(player2?.getFirstname())"
+    }
     
     func addPlayer(player: Player) {
         if(player1 == nil) {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Game {
+class Game: NSObject {
     private var started: Bool = false
     
     private var finished: Bool = false
@@ -24,12 +24,16 @@ class Game {
     
     private var teams = [teamId:Team]()
     
+    override  var description: String {
+        return "\(teams)"
+    }
+    
     enum teamId {
         case team1
         case team2
     }
     
-    init () {
+    override init () {
         teams[teamId.team1] = Team()
         teams[teamId.team2] = Team()
     }

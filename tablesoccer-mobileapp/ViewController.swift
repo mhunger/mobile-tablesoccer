@@ -243,25 +243,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func setPlayerIfDraggedOnButton(locationInView: CGPoint) {
+        
+        var teamid: Game.teamId?
+        
         if(CGRectContainsPoint(teamOnePlayerOneButton.frame, locationInView)) {
             teamOnePlayerOneButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+            teamid = Game.teamId.team1
         }
         
         if(CGRectContainsPoint(teamOnePlayerTwoButton.frame, locationInView)) {
             teamOnePlayerTwoButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
-            
+            teamid = Game.teamId.team1
         }
         
         if(CGRectContainsPoint(teamTwoPlayerOneButton.frame, locationInView)) {
             teamTwoPlayerOneButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+            teamid = Game.teamId.team2
         }
         
         if(CGRectContainsPoint(teamTwoPlayerTwoButton.frame, locationInView)) {
             teamTwoPlayerTwoButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+            teamid = Game.teamId.team2
         }
 
-        game.addPlayer(Game.teamId.team1, player: draggedCell.getPlayer())
-        println("\(game)")
+        if(teamid != nil) {
+            game.addPlayer(teamid!, player: draggedCell.getPlayer())
+            print("\(game)")
+        }
     }
     
     func snapshopOfCell(inputView: UIView) -> UIView {
