@@ -173,11 +173,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let state = longpress.state
         
         var locationInTableView = longpress.locationInView(playerTable)
-        
         var locationInView = longpress.locationInView(self.view)
-        
-        println("\(locationInTableView)")
-        println("\(locationInView)")
         
         var indexPath = playerTable.indexPathForRowAtPoint(locationInTableView)
         
@@ -191,40 +187,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 My.cellSnapshot  = snapshopOfCell(draggedCell)
                 
-                var center = draggedCell.center
+                let globalPoint = draggedCell.superview?.convertPoint(draggedCell.frame.origin, toView: nil)
                 
-                println("\(center)")
-                My.cellSnapshot!.center = center
+                println("global point: \(globalPoint)")
                 
-                My.cellSnapshot!.alpha = 0.0
+                My.cellSnapshot!.center.x = locationInView.x
+                
+                My.cellSnapshot!.center.y = locationInView.y
+                
+                My.cellSnapshot!.alpha = 0.90
                 
                 self.view.addSubview(My.cellSnapshot!)
-                
-                UIView.animateWithDuration(0.25, animations: { () -> Void in
-                    
-                    center.y = locationInView.y
-                    
-                    My.cellSnapshot!.center = center
-                    
-                    My.cellSnapshot!.transform = CGAffineTransformMakeScale(1.05, 1.05)
-                    
-                    My.cellSnapshot!.alpha = 0.98
-                    
-                    self.draggedCell.alpha = 0.0
-                    
-                    }, completion: { (finished) -> Void in
-                        
-                        if finished {
-                            
-                            self.draggedCell.hidden = true
-                            
-                        }
-                })
-            }
+                            }
         case UIGestureRecognizerState.Changed:
             var center = My.cellSnapshot!.center
             
             center.y = locationInView.y
+            center.x = locationInView.x
             
             My.cellSnapshot!.center = center
         default:
