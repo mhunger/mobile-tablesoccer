@@ -10,11 +10,13 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    private var game: Game = Game();
+    private var gameManager: GameManager = GameManager();
     
     private var players = [Player]()
     
     private var draggedCell: PlayerTableViewCell = PlayerTableViewCell()
+    
+    @IBOutlet weak var startButton: UIButton!
     
     @IBOutlet weak var teamOnePlayerOneButton: UIButton!
     
@@ -65,7 +67,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     * later
     */
     func loadSamplePlayers() {
-        players.extend(
+        players.appendContentsOf(
             [
                 Player(firstname: "Michael", lastname: "Hunger", ranking: 1),
                 Player(firstname: "Thomas", lastname: "Müller", ranking: 2),
@@ -114,7 +116,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func increaseScoreTeamOnePlayerOne(sender: UIButton) {
-        game.increaseScore(
+        gameManager.increaseScore(
             Game.teamId.team1,
             opponent: Game.teamId.team2
         )
@@ -123,7 +125,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func increaseScoreTeamOnePlayerTwo(sender: UIButton) {
-        game.increaseScore(
+        gameManager.increaseScore(
             Game.teamId.team1,
             opponent: Game.teamId.team2
         )
@@ -132,7 +134,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func increaseScoreTeamTwoPlayerOne(sender: UIButton) {
-        game.increaseScore(
+        gameManager.increaseScore(
             Game.teamId.team2,
             opponent: Game.teamId.team1
         )
@@ -141,7 +143,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func increaseScoreTeamTwoPlayerTwo(sender: UIButton) {
-        game.increaseScore(
+        gameManager.increaseScore(
             Game.teamId.team2,
             opponent: Game.teamId.team1
         )
@@ -155,7 +157,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         loadSamplePlayers()
         
-        let longpress = UILongPressGestureRecognizer(target: self, action: "longPressGestureRecognized:")
+        let longpress = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.longPressGestureRecognized(_:)))
         playerTable.addGestureRecognizer(longpress)
         
         
@@ -179,14 +181,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let state = longpress.state
         
-        var locationInTableView = longpress.locationInView(playerTable)
-        var locationInView = longpress.locationInView(self.view)
+        let locationInTableView = longpress.locationInView(playerTable)
+        let locationInView = longpress.locationInView(self.view)
         
-        var indexPath = playerTable.indexPathForRowAtPoint(locationInTableView)
+        let indexPath = playerTable.indexPathForRowAtPoint(locationInTableView)
         
         switch (state) {
         case UIGestureRecognizerState.Began:
-            if let test = indexPath {
+            if indexPath != nil {
                 Path.initialIndexPath = indexPath
                 
                 draggedCellIndexPath = indexPath!
@@ -267,15 +269,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
 
         if(teamid != nil) {
-            game.addPlayer(teamid!, player: draggedCell.getPlayer())
-            print("\(game)")
+            gameManager.addPlayer(teamid!, player: draggedCell.getPlayer())
+            print("\(gameManager)")
         }
     }
     
     func snapshopOfCell(inputView: UIView) -> UIView {
         UIGraphicsBeginImageContextWithOptions(inputView.bounds.size, false, 0.0)
         
-        inputView.layer.renderInContext(UIGraphicsGetCurrentContext())
+        inputView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         
         let image = UIGraphicsGetImageFromCurrentImageContext() as UIImage
         
@@ -303,11 +305,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func startStopGame(sender: UIButton, forEvent event: UIEvent) {
         
-        if(game.isStarted()) {
-            game.stopGame()
+        if(gameManager.isStarted()) {
+            gameManager.stopGame()
             sender.setTitle("Start Game", forState: UIControlState.Normal)
         } else {
-            game.startGame()
+            gameManager.startGame()
             sender.setTitle("Stop Game", forState: UIControlState.Normal)
         }
 
@@ -316,33 +318,46 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func setTeamScore() {
         
-        teamOneScoreDisplayValue = game.getTeamScore(Game.teamId.team1)
-        teamTwoScoreDisplayValue = game.getTeamScore(Game.teamId.team2)
+        teamOneScoreDisplayValue = gameManager.getTeamScore(Game.teamId.team1)
+        teamTwoScoreDisplayValue = gameManager.getTeamScore(Game.teamId.team2)
         
         setMatches()
+        setStartButton()
         
     }
     
+    func setStartButton() {
+        if(!gameManager.isStarted()) {
+            print("Set start button to start")
+            startButton!.setTitle("Start Game", forState: UIControlState.Normal)
+        }
+    }
+    
     func setMatches(){
-        var matches = game.getTeamMatches()
-        print(matches)
-        println()
+        var matches = gameManager.getTeamMatches()
         
         if(matches[Game.teamId.team1] > 0) {
             teamOneMatchOne.backgroundColor = UIColor.blackColor()
-            print("writing color")
+        } else {
+            teamOneMatchOne.backgroundColor = UIColor.clearColor()
         }
         
         if(matches[Game.teamId.team1] > 1) {
             teamOneMatchTwo.backgroundColor = UIColor.blackColor()
+        } else {
+            teamOneMatchTwo.backgroundColor = UIColor.clearColor()
         }
         
         if(matches[Game.teamId.team2] > 0) {
             teamTwoMatchOne.backgroundColor = UIColor.blackColor()
+        } else {
+            teamTwoMatchOne.backgroundColor = UIColor.clearColor()
         }
         
         if(matches[Game.teamId.team2] > 1) {
             teamTwoMatchTwo.backgroundColor = UIColor.blackColor()
+        } else {
+            teamTwoMatchTwo.backgroundColor = UIColor.clearColor()
         }
     }
 }
