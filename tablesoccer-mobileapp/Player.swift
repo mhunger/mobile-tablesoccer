@@ -9,13 +9,16 @@
 import Foundation
 
 class Player {
+    
+    private var id: Int?
     private var firstname: String = ""
     
     private var lastname: String = ""
     
     private var ranking: Int
     
-    init(firstname: String, lastname: String, ranking: Int) {
+    init(id: Int, firstname: String, lastname: String, ranking: Int) {
+        self.id = id
         self.firstname = firstname
         self.lastname = lastname
         self.ranking = ranking
@@ -26,4 +29,6 @@ class Player {
     func getLastname() -> String {return lastname}
     
     func getRanking() -> Int {return ranking}
+    
+    func getId() -> Int {return id!}
 }

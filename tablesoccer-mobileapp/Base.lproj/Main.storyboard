@@ -52,7 +52,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iT2-sj-jTr">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iT2-sj-jTr" customClass="PlayerButton" customModule="tablesoccer_mobileapp" customModuleProvider="target">
                                 <rect key="frame" x="86" y="188" width="78" height="38"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
@@ -61,10 +61,10 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="increaseScoreTeamOnePlayerTwo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eJk-So-lDm"/>
+                                    <action selector="increaseScoreTeamLeftDefense:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aYA-Pg-DV6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgY-Ss-zDD">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgY-Ss-zDD" customClass="PlayerButton" customModule="tablesoccer_mobileapp" customModuleProvider="target">
                                 <rect key="frame" x="287" y="94" width="78" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -72,10 +72,10 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="increaseScoreTeamTwoPlayerOne:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b8f-GM-Xc3"/>
+                                    <action selector="increaseScoreTeamRightOffense:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zzC-QE-Gmn"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzQ-Mo-SeO">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dzQ-Mo-SeO" customClass="PlayerButton" customModule="tablesoccer_mobileapp" customModuleProvider="target">
                                 <rect key="frame" x="287" y="188" width="78" height="38"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -83,10 +83,10 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="increaseScoreTeamTwoPlayerTwo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S7w-ka-VJK"/>
+                                    <action selector="increaseScoreTeamRightDefense:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y1q-g2-sX3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rq2-nw-Xuo">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rq2-nw-Xuo" customClass="PlayerButton" customModule="tablesoccer_mobileapp" customModuleProvider="target">
                                 <rect key="frame" x="86" y="90" width="78" height="37"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
@@ -95,7 +95,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="increaseScoreTeamOnePlayerOne:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iEU-C6-sMT"/>
+                                    <action selector="increaseScoreTeamLeftOffense:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OOh-i4-FF8"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1LQ-cK-5nB">
@@ -165,15 +165,15 @@
                     <connections>
                         <outlet property="playerTable" destination="TSm-Th-nTs" id="Kaf-dl-DnG"/>
                         <outlet property="startButton" destination="6v0-NG-Vlr" id="jdK-Am-XL1"/>
+                        <outlet property="teamLeftDefenseButton" destination="iT2-sj-jTr" id="eoQ-XK-p19"/>
+                        <outlet property="teamLeftOffenseButton" destination="rq2-nw-Xuo" id="VZ9-y2-qHr"/>
                         <outlet property="teamOneMatchOne" destination="1LQ-cK-5nB" id="JGg-Go-Q9b"/>
                         <outlet property="teamOneMatchTwo" destination="2mc-id-Rw4" id="GM9-BM-XgQ"/>
-                        <outlet property="teamOnePlayerOneButton" destination="rq2-nw-Xuo" id="t7N-XN-XgB"/>
-                        <outlet property="teamOnePlayerTwoButton" destination="iT2-sj-jTr" id="8zz-QA-c1A"/>
                         <outlet property="teamOneScore" destination="UJi-dL-je9" id="gO6-Lx-OkT"/>
+                        <outlet property="teamRightDefenseButton" destination="dzQ-Mo-SeO" id="qcX-Zh-eym"/>
+                        <outlet property="teamRightOffenseButton" destination="BgY-Ss-zDD" id="DJw-4c-QCb"/>
                         <outlet property="teamTwoMatchOne" destination="Irr-O3-nwx" id="RDl-Yp-FEB"/>
                         <outlet property="teamTwoMatchTwo" destination="t0I-YJ-sW8" id="cBq-5Y-kXn"/>
-                        <outlet property="teamTwoPlayerOneButton" destination="BgY-Ss-zDD" id="KoR-8N-sxO"/>
-                        <outlet property="teamTwoPlayerTwoButton" destination="dzQ-Mo-SeO" id="7QT-hF-jXJ"/>
                         <outlet property="teamTwoScore" destination="t1m-oJ-9TJ" id="Hfx-pR-Ivu"/>
                     </connections>
                 </viewController>

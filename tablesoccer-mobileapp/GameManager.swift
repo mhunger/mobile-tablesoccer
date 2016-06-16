@@ -27,8 +27,8 @@ class GameManager: NSObject {
         initGame()
     }
     
-    func addPlayer(team:Game.teamId, player: Player) {
-        currentGame!.addPlayer(team, player: player)
+    func addPlayer(team:Game.teamId, side: Game.side, pos: Game.position, player: Player) {
+        currentGame!.addPlayer(team, side: side, position: pos, player: player)
     }
     
     func initGame() {
@@ -36,7 +36,6 @@ class GameManager: NSObject {
     }
     
     func startGame() {
-        initGame()
         currentGame!.start();
         started = true
     }
@@ -63,8 +62,8 @@ class GameManager: NSObject {
         return currentGame!.getTeamMatches()
     }
     
-    func increaseScore(scorer: Game.teamId, opponent: Game.teamId) {
-        currentGame!.increaseScore(scorer, opponent: opponent)
+    func increaseScore(scorer: Game.teamId, player: Player, opponent: Game.teamId) {
+        currentGame!.increaseScore(scorer, player: player, opponent: opponent)
         
         if(currentGame!.isFinished()) {
             stopGame()

@@ -11,7 +11,9 @@ import Foundation
 class Game: NSObject {
     private var finished: Bool = false
     
-    private var matches = [teamId:Int]()
+    private var matchScore = [teamId:Int]()
+    
+    private var matches = [teamId:Match]()
     
     private var maxGoals: Int
     
@@ -19,17 +21,27 @@ class Game: NSObject {
     
     private var maxMatches: Int
     
-    private var teams = [teamId:Team]()
+    private var teams = [teamId: Team]()
     
     private var currentMatch: Match?
     
     override  var description: String {
-        return "team: \(teams) matches: \(matches)"
+        return "team: \(teams) matches: \(matchScore)"
     }
     
     enum teamId {
         case team1
         case team2
+    }
+    
+    enum position {
+        case offense
+        case defense
+    }
+    
+    enum side {
+        case dark
+        case light
     }
     
     init (maxGoals: Int, winningScore: Int, maxMatches: Int) {
@@ -38,19 +50,27 @@ class Game: NSObject {
         self.maxMatches = maxMatches
         
         super.init()
-        
         teams[teamId.team1] = Team()
         teams[teamId.team2] = Team()
+        
         currentMatch = Match(winningScore: winningScore, maxGoals: maxGoals)
     }
     
-    func addPlayer(team:teamId, player: Player) {
-        teams[team]?.addPlayer(player)
+    func addPlayer(team:teamId, side: Game.side, position: Game.position, player: Player) {
+        teams[team]!.addPlayer(team, position: position, player: player)
+        teams[team]!.setSide(side)
+        
+        currentMatch!.addPlayer(
+            team,
+            side: side,
+            position:  position,
+            player: MatchPlayer(player: player, position: position)
+        )
     }
     
     func start() {
-        matches[teamId.team1] = 0
-        matches[teamId.team2] = 0
+        matchScore[teamId.team1] = 0
+        matchScore[teamId.team2] = 0
         
         startMatch()
     }
@@ -63,31 +83,41 @@ class Game: NSObject {
         return currentMatch!.getScoreForTeam(team)
     }
     
-    func getTeams() -> [teamId:Team] {
+    func getTeams() -> [Game.teamId:Team] {
         return teams
     }
     
     func getTeamMatches() -> [teamId:Int]{
-        return matches
+        return matchScore
     }
     
-    func setTeams(teams: [teamId:Team]) {
+    func setTeams(teams: [Game.teamId:Team]) {
         self.teams = teams
     }
     
-    func increaseScore(scorer: teamId, opponent: teamId) {
-        currentMatch!.increaseScore(scorer, opponent: opponent)
+    func increaseScore(scorer: teamId, player: Player, opponent: teamId) {
+        
+        currentMatch!.increaseScore(scorer, side: getSide(scorer), position: getPositionForPlayer(player), opponent: opponent)
         
         if(currentMatch!.isFinished()) {
             finishMatch(currentMatch!.getWinner())
         }
     }
     
+    private func getSide(player: teamId) -> side {
+        return teams[player]!.getSide()
+    }
+    
+    private func getPositionForPlayer(player: Player) -> position {
+        //@TODO add logic to get position of player from teams
+        return Game.position.defense
+    }
+    
     func finishMatch(team: teamId) {
-        let matchesTemp = matches[team]! + 1
+        let matchesTemp = matchScore[team]! + 1
         print("matchesTemp " + "\(matchesTemp)")
         
-        matches[team] = matchesTemp
+        matchScore[team] = matchesTemp
         
         if(matchesTemp >= maxMatches) {
             finish()

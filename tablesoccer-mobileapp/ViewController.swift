@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    private var gameManager: GameManager = GameManager();
+    private var gameManager = GameManager();
     
     private var players = [Player]()
     
@@ -18,13 +18,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var startButton: UIButton!
     
-    @IBOutlet weak var teamOnePlayerOneButton: UIButton!
+    @IBOutlet weak var teamLeftOffenseButton: PlayerButton!
     
-    @IBOutlet weak var teamOnePlayerTwoButton: UIButton!
+    @IBOutlet weak var teamLeftDefenseButton: PlayerButton!
     
-    @IBOutlet weak var teamTwoPlayerOneButton: UIButton!
+    @IBOutlet weak var teamRightOffenseButton: PlayerButton!
     
-    @IBOutlet weak var teamTwoPlayerTwoButton: UIButton!
+    @IBOutlet weak var teamRightDefenseButton: PlayerButton!
     
     private var draggedCellIndexPath: NSIndexPath = NSIndexPath()
     
@@ -69,12 +69,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func loadSamplePlayers() {
         players.appendContentsOf(
             [
-                Player(firstname: "Michael", lastname: "Hunger", ranking: 1),
-                Player(firstname: "Thomas", lastname: "Müller", ranking: 2),
-                Player(firstname: "Friedrich", lastname: "Lahm", ranking: 3),
-                Player(firstname: "Tina", lastname: "Treibel", ranking: 4),
-                Player(firstname: "Christian", lastname: "Herz", ranking: 5),
-                Player(firstname: "Tobias", lastname: "Krass", ranking: 6)
+                Player(id: 1, firstname: "Michael", lastname: "Hunger", ranking: 1),
+                Player(id: 2, firstname: "Thomas", lastname: "Müller", ranking: 2),
+                Player(id: 3, firstname: "Friedrich", lastname: "Lahm", ranking: 3),
+                Player(id: 4, firstname: "Tina", lastname: "Treibel", ranking: 4),
+                Player(id: 5, firstname: "Christian", lastname: "Herz", ranking: 5),
+                Player(id: 6, firstname: "Tobias", lastname: "Krass", ranking: 6)
             ]
         )
     }
@@ -115,36 +115,40 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    @IBAction func increaseScoreTeamOnePlayerOne(sender: UIButton) {
+    @IBAction func increaseScoreTeamLeftOffense(sender: PlayerButton) {
         gameManager.increaseScore(
             Game.teamId.team1,
+            player: sender.getPlayer(),
             opponent: Game.teamId.team2
         )
         
         setTeamScore()
     }
     
-    @IBAction func increaseScoreTeamOnePlayerTwo(sender: UIButton) {
+    @IBAction func increaseScoreTeamLeftDefense(sender: PlayerButton) {
         gameManager.increaseScore(
             Game.teamId.team1,
+            player: sender.getPlayer(),
             opponent: Game.teamId.team2
         )
         
         setTeamScore()
     }
-    
-    @IBAction func increaseScoreTeamTwoPlayerOne(sender: UIButton) {
+
+    @IBAction func increaseScoreTeamRightOffense(sender: PlayerButton) {
         gameManager.increaseScore(
             Game.teamId.team2,
+            player: sender.getPlayer(),
             opponent: Game.teamId.team1
         )
         
         setTeamScore()
     }
     
-    @IBAction func increaseScoreTeamTwoPlayerTwo(sender: UIButton) {
+    @IBAction func increaseScoreTeamRightDefense(sender: PlayerButton) {
         gameManager.increaseScore(
             Game.teamId.team2,
+            player: sender.getPlayer(),
             opponent: Game.teamId.team1
         )
         
@@ -247,29 +251,47 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func setPlayerIfDraggedOnButton(locationInView: CGPoint) {
         
         var teamid: Game.teamId?
+        var side: Game.side?
+        var position: Game.position?
         
-        if(CGRectContainsPoint(teamOnePlayerOneButton.frame, locationInView)) {
-            teamOnePlayerOneButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+        if(CGRectContainsPoint(teamLeftOffenseButton.frame, locationInView)) {
+            teamLeftOffenseButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+            teamLeftOffenseButton.setPlayer(draggedCell.getPlayer())
             teamid = Game.teamId.team1
+            side = Game.side.dark
+            position = Game.position.offense
+            
         }
         
-        if(CGRectContainsPoint(teamOnePlayerTwoButton.frame, locationInView)) {
-            teamOnePlayerTwoButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+        if(CGRectContainsPoint(teamLeftDefenseButton.frame, locationInView)) {
+            teamLeftDefenseButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+            teamLeftDefenseButton.setPlayer(draggedCell.getPlayer())
             teamid = Game.teamId.team1
+            side = Game.side.dark
+            position = Game.position.defense
         }
         
-        if(CGRectContainsPoint(teamTwoPlayerOneButton.frame, locationInView)) {
-            teamTwoPlayerOneButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+        if(CGRectContainsPoint(teamRightOffenseButton.frame, locationInView)) {
+            teamRightOffenseButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+            teamRightOffenseButton.setPlayer(draggedCell.getPlayer())
             teamid = Game.teamId.team2
+            side = Game.side.light
+            position = Game.position.offense
         }
         
-        if(CGRectContainsPoint(teamTwoPlayerTwoButton.frame, locationInView)) {
-            teamTwoPlayerTwoButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+        if(CGRectContainsPoint(teamRightDefenseButton.frame, locationInView)) {
+            teamRightDefenseButton.setTitle("\(draggedCell.lastName.text!)", forState: UIControlState.Normal)
+            teamRightDefenseButton.setPlayer(draggedCell.getPlayer())
             teamid = Game.teamId.team2
+            side = Game.side.light
+            position = Game.position.defense
         }
 
         if(teamid != nil) {
-            gameManager.addPlayer(teamid!, player: draggedCell.getPlayer())
+            gameManager.addPlayer(teamid!,
+                                  side: side!,
+                                  pos: position!,
+                                  player: draggedCell.getPlayer())
             print("\(gameManager)")
         }
     }
